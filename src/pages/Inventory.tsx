@@ -16,6 +16,7 @@ import { IngredientsInventory } from "../types/inventory";
 
 const Inventory = () => {
   const [inventory, setInventory] = useState<IngredientsInventory[]>([]);
+  const [quantity, setQuantity] = useState<number>();
 
   useEffect(() => {
     setInventory(ingredientsInventory.inventory);
@@ -36,7 +37,11 @@ const Inventory = () => {
             <SelectIngredient />
           </Grid>
           <Grid>
-            <SelectAmount />
+            <SelectAmount
+              value={quantity}
+              setValue={setQuantity}
+              label="2. Select Amount"
+            />
           </Grid>
           <Grid>
             <Button endDecorator={<Check />} sx={{ mt: 3.3 }}>

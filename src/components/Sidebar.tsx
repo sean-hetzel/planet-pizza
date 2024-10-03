@@ -19,13 +19,14 @@ const Sidebar = () => {
       }}
     >
       <Typography
-        level="h2"
+        level="h3"
         fontWeight="bold"
-        mb={2}
+        m={1}
         textColor="primary.plainColor"
+        fontStyle={"italic"}
         endDecorator={<DarkMode sx={{ color: "primary.plainColor" }} />}
       >
-        Planet Pizza
+        PLANET PIZZA
       </Typography>
       <List sx={{ "--List-item-radius": "8px" }}>
         <ListItemButton

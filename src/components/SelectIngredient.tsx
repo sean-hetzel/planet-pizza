@@ -28,6 +28,7 @@ const SelectIngredient = () => {
       <FormLabel>1. Choose an Ingredient</FormLabel>
       <Autocomplete
         options={ingredients}
+        placeholder="Search ingredient"
         groupBy={(option) => option.type} // Grouping by category
         getOptionLabel={(option) => `${option.emoji} ${option.name}`} // Displaying ingredient name
         onChange={(_, newValue) => {

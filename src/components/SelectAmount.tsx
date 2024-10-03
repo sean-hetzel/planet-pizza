@@ -2,20 +2,31 @@ import { Add, Remove } from "@mui/icons-material";
 import { FormControl, FormLabel, IconButton, Input } from "@mui/joy";
 import { useState } from "react";
 
-const SelectAmount = () => {
-  const [value, setValue] = useState(0);
+type SelectAmountProps = {
+  value?: number;
+  setValue?: (newValue?: number) => void; 
+  label?: string;
+};
 
-  const handleIncrement = () => setValue((prev) => prev + 1);
-  const handleDecrement = () => setValue((prev) => (prev > 0 ? prev - 1 : 0));
+const SelectAmount = (props: SelectAmountProps) => {
+  const { value, setValue, label } = props;
+
+  const handleIncrement = () => setValue?.(value !== undefined ? value + 1 : 1);
+  const handleDecrement = () =>
+    setValue?.(value !== undefined && value > 0 ? value - 1 : 0);
 
   return (
     <FormControl>
-      <FormLabel>2. Select Amount</FormLabel>
+      {label && <FormLabel>{label}</FormLabel>}
       <Input
-        placeholder="0"
+        placeholder="Enter quantity"
         type="number"
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        value={value === undefined ? "" : value}
+        onChange={(e) => {
+          const newValue = e.target.value;
+          setValue?.(newValue === "" ? undefined : Number(newValue));
+        }}
+        autoFocus
         endDecorator={
           <>
             <IconButton size="sm" onClick={handleDecrement}>
