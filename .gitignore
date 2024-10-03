@@ -11,6 +11,13 @@ node_modules
 dist
 dist-ssr
 *.local
+package-lock.json
+
+# Environment variables
+.env
+
+# Test data
+ingredients.json
 
 # Editor directories and files
 .vscode/*

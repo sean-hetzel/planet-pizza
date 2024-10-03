@@ -1,22 +1,43 @@
 import "./App.css";
-import { Box } from "@mui/joy";
+import { Box, CssVarsProvider, extendTheme } from "@mui/joy";
 import Sidebar from "./components/Sidebar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Inventory from "./pages/Inventory";
 import Recipes from "./pages/Recipes";
+import Header from "./components/Header";
+
+// Extend the theme and set the default mode to dark
+const theme = extendTheme({
+  colorSchemes: {
+    dark: {
+      palette: {
+        background: {
+          body: "#121212", // Example of setting the background color in dark mode
+        },
+      },
+    },
+  },
+});
 
 function App() {
   return (
-    <BrowserRouter>
-      <Box sx={{ display: "flex" }}>
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Navigate to="/recipes" />} />
-          <Route path="/recipes" element={<Recipes />} />
-          <Route path="/inventory" element={<Inventory />} />
-        </Routes>
-      </Box>
-    </BrowserRouter>
+    <CssVarsProvider theme={theme} defaultMode="dark">
+      <BrowserRouter>
+        <Box sx={{ display: "flex", height: "100vh", bgcolor: "neutral.700" }}>
+          <Sidebar />
+          <Box sx={{ flex: 1, overflow: "auto" }}>
+            <Header />
+            <Box sx={{ p: 2 }}>
+              <Routes>
+                <Route path="/" element={<Navigate to="/recipes" />} />
+                <Route path="/recipes" element={<Recipes />} />
+                <Route path="/inventory" element={<Inventory />} />
+              </Routes>
+            </Box>
+          </Box>
+        </Box>
+      </BrowserRouter>
+    </CssVarsProvider>
   );
 }
 
@@ -34,3 +55,5 @@ export default App;
 // Pizza manager:
 // Big pizza image svg with ability to add ingredients to it and save as new recipe
 // See and edit list of pizza recipes
+
+// https://github.com/StrongMind/culture/blob/main/recruit/full-stack-developer.md
