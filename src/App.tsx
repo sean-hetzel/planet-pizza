@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { Box } from "@mui/joy";
+import Sidebar from "./components/Sidebar";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Inventory from "./pages/Inventory";
+import Recipes from "./pages/Recipes";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Box sx={{ display: "flex" }}>
+        <Sidebar />
+        <Routes>
+          <Route path="/" element={<Navigate to="/recipes" />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/inventory" element={<Inventory />} />
+        </Routes>
+      </Box>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
+
+// Pizza names:
+// Jumbo Jupiter
+// Spicy Venus
+// Earthly Paradise
+
+// Topping manager:
+// Autocomplete for adding new ingredient
+// +- buttons and text input for editing amount of ingredient
+
+// Pizza manager:
+// Big pizza image svg with ability to add ingredients to it and save as new recipe
+// See and edit list of pizza recipes
