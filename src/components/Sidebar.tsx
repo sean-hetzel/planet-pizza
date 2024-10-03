@@ -6,8 +6,8 @@ import {
   Typography,
 } from "@mui/joy";
 import { Link } from "react-router-dom";
-import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
+import { DarkMode, LocalPizza, MenuBook } from "@mui/icons-material";
+
 const Sidebar = () => {
   return (
     <Box
@@ -23,6 +23,7 @@ const Sidebar = () => {
         fontWeight="bold"
         mb={2}
         textColor="primary.plainColor"
+        endDecorator={<DarkMode sx={{ color: "primary.plainColor" }} />}
       >
         Planet Pizza
       </Typography>
@@ -33,7 +34,7 @@ const Sidebar = () => {
           sx={{ color: "primary.plainColor" }}
         >
           <ListItemDecorator>
-            <MenuBookIcon />
+            <MenuBook />
           </ListItemDecorator>
           <Typography level="h4" textColor="primary.plainColor">
             Inventory
@@ -45,7 +46,7 @@ const Sidebar = () => {
           sx={{ color: "primary.plainColor" }}
         >
           <ListItemDecorator>
-            <LocalPizzaIcon />
+            <LocalPizza />
           </ListItemDecorator>
           <Typography level="h4" textColor="primary.plainColor">
             Recipes

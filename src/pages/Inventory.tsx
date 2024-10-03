@@ -15,9 +15,7 @@ import { useEffect, useState } from "react";
 import { IngredientsInventory } from "../types/inventory";
 
 const Inventory = () => {
-  const [inventory, setInventory] = useState<IngredientsInventory[] | null>(
-    null
-  );
+  const [inventory, setInventory] = useState<IngredientsInventory[]>([]);
 
   useEffect(() => {
     setInventory(ingredientsInventory.inventory);
@@ -59,7 +57,11 @@ const Inventory = () => {
           In-Stock Ingredients
         </Typography>
         <Divider sx={{ mt: 1, mb: 2, bgcolor: "primary.plainColor" }} />
-        <InventoryTable inventory={inventory} />
+        {inventory.length === 0 ? (
+          <p>No ingredients</p>
+        ) : (
+          <InventoryTable inventory={inventory} />
+        )}
       </Box>
     </Box>
   );
