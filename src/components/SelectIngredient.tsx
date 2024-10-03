@@ -2,7 +2,6 @@ import {
   Autocomplete,
   AutocompleteOption,
   Box,
-  Chip,
   FormControl,
   FormLabel,
   ListItemContent,
@@ -11,25 +10,27 @@ import {
 } from "@mui/joy";
 import { useState } from "react";
 import pizzaIngredients from "../../ingredients.json";
+import { Ingredient } from "../types/ingredients";
 
-const groupedOptions = pizzaIngredients.ingredients.map((ingredient) => ({
-  ...ingredient,
-  category: ingredient.type.charAt(0).toUpperCase() + ingredient.type.slice(1), // Capitalize the category
-}));
+const ingredients: Ingredient[] = pizzaIngredients.ingredients.map(
+  (ingredient) => ({
+    ...ingredient,
+    type: ingredient.type.charAt(0).toUpperCase() + ingredient.type.slice(1), // Capitalize the category
+  })
+);
 
 const SelectIngredient = () => {
   // State for selected ingredient
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<Ingredient | null>(null);
 
   return (
     <FormControl id="grouped-autocomplete">
-      <FormLabel>Choose an Ingredient</FormLabel>
+      <FormLabel>1. Choose an Ingredient</FormLabel>
       <Autocomplete
-        options={groupedOptions}
-        groupBy={(option) => option.category} // Grouping by category
-        getOptionLabel={(option) => option.name} // Displaying ingredient name
-        onChange={(event, newValue) => {
-          // @ts-ignore
+        options={ingredients}
+        groupBy={(option) => option.type} // Grouping by category
+        getOptionLabel={(option) => `${option.emoji} ${option.type}`} // Displaying ingredient name
+        onChange={(_, newValue) => {
           setValue(newValue);
         }}
         renderOption={(props, option) => (
@@ -46,7 +47,7 @@ const SelectIngredient = () => {
             </Box>
           </AutocompleteOption>
         )}
-        sx={{ width: 300, bgcolor: "neutral.800" }} // Set the width of the autocomplete
+        sx={{ width: 300 }} // Set the width of the autocomplete
       />
     </FormControl>
   );
