@@ -29,18 +29,6 @@ const Sidebar = () => {
       <List sx={{ "--List-item-radius": "8px" }}>
         <ListItemButton
           component={Link}
-          to="/recipes"
-          sx={{ color: "primary.plainColor" }}
-        >
-          <ListItemDecorator>
-            <LocalPizzaIcon />
-          </ListItemDecorator>
-          <Typography level="h4" textColor="primary.plainColor">
-            Recipes
-          </Typography>
-        </ListItemButton>
-        <ListItemButton
-          component={Link}
           to="/inventory"
           sx={{ color: "primary.plainColor" }}
         >
@@ -49,6 +37,18 @@ const Sidebar = () => {
           </ListItemDecorator>
           <Typography level="h4" textColor="primary.plainColor">
             Inventory
+          </Typography>
+        </ListItemButton>
+        <ListItemButton
+          component={Link}
+          to="/recipes"
+          sx={{ color: "primary.plainColor" }}
+        >
+          <ListItemDecorator>
+            <LocalPizzaIcon />
+          </ListItemDecorator>
+          <Typography level="h4" textColor="primary.plainColor">
+            Recipes
           </Typography>
         </ListItemButton>
       </List>

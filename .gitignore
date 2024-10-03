@@ -18,6 +18,7 @@ package-lock.json
 
 # Test data
 ingredients.json
+inventory.json
 
 # Editor directories and files
 .vscode/*

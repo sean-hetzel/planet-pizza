@@ -10,7 +10,7 @@ import {
 } from "@mui/joy";
 import { useState } from "react";
 import pizzaIngredients from "../../ingredients.json";
-import { Ingredient } from "../types/ingredients";
+import { Ingredient } from "../types/ingredient";
 
 const ingredients: Ingredient[] = pizzaIngredients.ingredients.map(
   (ingredient) => ({
@@ -29,7 +29,7 @@ const SelectIngredient = () => {
       <Autocomplete
         options={ingredients}
         groupBy={(option) => option.type} // Grouping by category
-        getOptionLabel={(option) => `${option.emoji} ${option.type}`} // Displaying ingredient name
+        getOptionLabel={(option) => `${option.emoji} ${option.name}`} // Displaying ingredient name
         onChange={(_, newValue) => {
           setValue(newValue);
         }}

@@ -9,8 +9,20 @@ import {
 import SelectIngredient from "../components/SelectIngredient";
 import SelectAmount from "../components/SelectAmount";
 import { Check, InfoOutlined } from "@mui/icons-material";
+import InventoryTable from "../components/InventoryTable";
+import ingredientsInventory from "../../inventory.json";
+import { useEffect, useState } from "react";
+import { IngredientsInventory } from "../types/inventory";
 
 const Inventory = () => {
+  const [inventory, setInventory] = useState<IngredientsInventory[] | null>(
+    null
+  );
+
+  useEffect(() => {
+    setInventory(ingredientsInventory.inventory);
+  }, []);
+
   return (
     <Box>
       <Typography sx={{ mb: 2, color: "primary.plainColor" }}>
@@ -47,6 +59,7 @@ const Inventory = () => {
           In-Stock Ingredients
         </Typography>
         <Divider sx={{ mt: 1, mb: 2, bgcolor: "primary.plainColor" }} />
+        <InventoryTable inventory={inventory} />
       </Box>
     </Box>
   );

@@ -29,9 +29,9 @@ function App() {
             <Header />
             <Box sx={{ p: 2 }}>
               <Routes>
-                <Route path="/" element={<Navigate to="/recipes" />} />
-                <Route path="/recipes" element={<Recipes />} />
+                <Route path="/" element={<Navigate to="/inventory" />} />
                 <Route path="/inventory" element={<Inventory />} />
+                <Route path="/recipes" element={<Recipes />} />
               </Routes>
             </Box>
           </Box>
@@ -55,5 +55,8 @@ export default App;
 // Pizza manager:
 // Big pizza image svg with ability to add ingredients to it and save as new recipe
 // See and edit list of pizza recipes
+
+// TODO:
+// Accessibility
 
 // https://github.com/StrongMind/culture/blob/main/recruit/full-stack-developer.md
