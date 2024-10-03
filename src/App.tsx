@@ -5,6 +5,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Inventory from "./pages/Inventory";
 import Recipes from "./pages/Recipes";
 import Header from "./components/Header";
+import useIsMobile from "./utils/useIsMobile";
 
 // Extend the theme and set the default mode to dark
 const theme = extendTheme({
@@ -20,11 +21,13 @@ const theme = extendTheme({
 });
 
 function App() {
+  const isMobile = useIsMobile();
+
   return (
     <CssVarsProvider theme={theme} defaultMode="dark">
       <BrowserRouter>
         <Box sx={{ display: "flex", height: "100vh", bgcolor: "neutral.700" }}>
-          <Sidebar />
+          {!isMobile && <Sidebar />}
           <Box sx={{ flex: 1, overflow: "auto" }}>
             <Header />
             <Box sx={{ p: 2 }}>

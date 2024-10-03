@@ -7,10 +7,33 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --background-color: #121212; /* Background color */
+  --text-color: #ffffff; /* Text color */
+  --scrollbar-bg: #333333; /* Scrollbar background color */
+  --scrollbar-thumb: #555555; /* Scrollbar thumb color */
 }
 
 body {
   margin: 0;
   height: 100%;
   width: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg); /* Scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb); /* Scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888; /* Thumb color on hover */
 }

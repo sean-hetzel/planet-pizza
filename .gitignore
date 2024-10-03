@@ -16,10 +16,6 @@ package-lock.json
 # Environment variables
 .env
 
-# Test data
-ingredients.json
-inventory.json
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

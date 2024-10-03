@@ -8,20 +8,29 @@ import {
   ListItemDecorator,
   Typography,
 } from "@mui/joy";
-import { useState } from "react";
-import pizzaIngredients from "../../ingredients.json";
-import { Ingredient } from "../types/ingredient";
+import { Ingredient } from "../types/ingredient"; // Ensure the Ingredient type is imported
 
-const ingredients: Ingredient[] = pizzaIngredients.ingredients.map(
-  (ingredient) => ({
-    ...ingredient,
-    type: ingredient.type.charAt(0).toUpperCase() + ingredient.type.slice(1), // Capitalize the category
-  })
-);
+type SelectIngredientProps = {
+  value: Ingredient | null; // Expect the selected ingredient to be passed
+  setValue: (ingredient: Ingredient | null) => void; // Function to set the selected ingredient
+  options: { ingredients: Ingredient[] }; // Add pizzaIngredients as a prop
+};
 
-const SelectIngredient = () => {
-  // State for selected ingredient
-  const [value, setValue] = useState<Ingredient | null>(null);
+const SelectIngredient = ({ value, setValue, options }: SelectIngredientProps) => {
+  // Capitalize the type and then sort the ingredients by type and name
+  const ingredients: Ingredient[] = options.ingredients
+    .map((ingredient) => ({
+      ...ingredient,
+      type: ingredient.type.charAt(0).toUpperCase() + ingredient.type.slice(1), // Capitalize the category
+    }))
+    .sort((a, b) => {
+      // Sort by type first, then by name
+      const typeComparison = a.type.localeCompare(b.type);
+      if (typeComparison === 0) {
+        return a.name.localeCompare(b.name); // Sort by name if types are the same
+      }
+      return typeComparison;
+    });
 
   return (
     <FormControl id="grouped-autocomplete">
@@ -31,8 +40,9 @@ const SelectIngredient = () => {
         placeholder="Search ingredient"
         groupBy={(option) => option.type} // Grouping by category
         getOptionLabel={(option) => `${option.emoji} ${option.name}`} // Displaying ingredient name
+        value={value} // Bind the selected value
         onChange={(_, newValue) => {
-          setValue(newValue);
+          setValue(newValue); // Update the selected ingredient
         }}
         renderOption={(props, option) => (
           <AutocompleteOption {...props}>

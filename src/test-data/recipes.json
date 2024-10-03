@@ -1,0 +1,115 @@
+{
+  "recipes": [
+    {
+      "name": "Jumbo Jupiter Pizza",
+      "crust": {
+        "name": "Thin Crust",
+        "emoji": "🥖"
+      },
+      "sauce": {
+        "name": "Marinara",
+        "emoji": "🍅"
+      },
+      "cheese": {
+        "name": "Mozzarella",
+        "emoji": "🧀"
+      },
+      "toppings": [
+        {
+          "name": "Pepperoni",
+          "emoji": "🍕"
+        },
+        {
+          "name": "Mushrooms",
+          "emoji": "🍄"
+        },
+        {
+          "name": "Ham",
+          "emoji": "🍖"
+        },
+        {
+          "name": "Bacon",
+          "emoji": "🥓"
+        },
+        {
+          "name": "Garlic",
+          "emoji": "🧄"
+        },
+        {
+          "name": "Salt",
+          "emoji": "🧂"
+        }
+      ]
+    },
+    {
+      "name": "Earthly Paradise Pizza",
+      "crust": {
+        "name": "Gluten-Free Crust",
+        "emoji": "🥯"
+      },
+      "sauce": {
+        "name": "Barbecue",
+        "emoji": "🌶️"
+      },
+      "cheese": {
+        "name": "Mozzarella",
+        "emoji": "🧀"
+      },
+      "toppings": [
+        {
+          "name": "Pineapple",
+          "emoji": "🍍"
+        },
+        {
+          "name": "Onions",
+          "emoji": "🧅"
+        },
+        {
+          "name": "Ham",
+          "emoji": "🍖"
+        }
+      ]
+    },
+    {
+      "name": "Spicy Venus Pizza",
+      "crust": {
+        "name": "Thin Crust",
+        "emoji": "🥖"
+      },
+      "sauce": {
+        "name": "Barbecue",
+        "emoji": "🌶️"
+      },
+      "cheese": {
+        "name": "Mozzarella",
+        "emoji": "🧀"
+      },
+      "toppings": [
+        {
+          "name": "Mushrooms",
+          "emoji": "🍄"
+        },
+        {
+          "name": "Onions",
+          "emoji": "🧅"
+        },
+        {
+          "name": "Pineapple",
+          "emoji": "🍍"
+        },
+        {
+          "name": "Bacon",
+          "emoji": "🥓"
+        },
+        {
+          "name": "Garlic",
+          "emoji": "🧄"
+        },
+        {
+          "name": "Salt",
+          "emoji": "🧂"
+        }
+      ]
+    }
+  ]
+}

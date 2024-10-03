@@ -10,17 +10,58 @@ import SelectIngredient from "../components/SelectIngredient";
 import SelectAmount from "../components/SelectAmount";
 import { Check, InfoOutlined } from "@mui/icons-material";
 import InventoryTable from "../components/InventoryTable";
-import ingredientsInventory from "../../inventory.json";
+import ingredientsInventory from "../test-data/inventory.json";
+import ingredients from "../test-data/ingredients.json";
 import { useEffect, useState } from "react";
 import { IngredientsInventory } from "../types/inventory";
+import { Ingredient } from "../types/ingredient";
 
 const Inventory = () => {
   const [inventory, setInventory] = useState<IngredientsInventory[]>([]);
-  const [quantity, setQuantity] = useState<number>();
+  const [selectedIngredient, setSelectedIngredient] =
+    useState<Ingredient | null>(null); // Track selected ingredient
+  const [quantity, setQuantity] = useState<number | undefined>();
+  const [error, setError] = useState(false); // Error state for form validation
 
   useEffect(() => {
     setInventory(ingredientsInventory.inventory);
   }, []);
+
+  const handleAddToStock = () => {
+    // Basic validation: Ensure an ingredient and quantity are selected
+    if (!selectedIngredient || !quantity) {
+      setError(true); // Show error if input is invalid
+      return;
+    }
+
+    // Check if the ingredient already exists in the inventory
+    const existingIngredientIndex = inventory.findIndex(
+      (item) => item.name === selectedIngredient.name
+    );
+
+    if (existingIngredientIndex >= 0) {
+      // If ingredient exists, update its quantity
+      const updatedInventory = [...inventory];
+      updatedInventory[existingIngredientIndex].quantity += quantity;
+      setInventory(updatedInventory);
+    } else {
+      // If ingredient doesn't exist, add it to the inventory
+      setInventory([
+        ...inventory,
+        {
+          name: selectedIngredient.name,
+          emoji: selectedIngredient.emoji,
+          type: selectedIngredient.type,
+          quantity,
+        }, // Add emoji as a placeholder
+      ]);
+    }
+
+    // Reset form inputs
+    setSelectedIngredient(null);
+    setQuantity(undefined);
+    setError(false); // Clear error
+  };
 
   return (
     <Box>
@@ -34,7 +75,11 @@ const Inventory = () => {
         <Divider sx={{ mt: 1, mb: 2, bgcolor: "primary.plainColor" }} />
         <Grid container spacing={2} sx={{ flexGrow: 1 }}>
           <Grid>
-            <SelectIngredient />
+            <SelectIngredient
+              value={selectedIngredient}
+              setValue={setSelectedIngredient}
+              options={ingredients}
+            />
           </Grid>
           <Grid>
             <SelectAmount
@@ -44,12 +89,17 @@ const Inventory = () => {
             />
           </Grid>
           <Grid>
-            <Button endDecorator={<Check />} sx={{ mt: 3.3 }}>
+            <Button
+              endDecorator={<Check />}
+              sx={{ mt: 3.3 }}
+              onClick={handleAddToStock}
+            >
               Add to Stock
             </Button>
-            {/* TODO: Add logic to this */}
-            {false && (
-              <FormHelperText sx={{ color: "danger.plainColor" }}>
+            {error && (
+              <FormHelperText
+                sx={{ color: "danger.plainColor", position: "absolute" }}
+              >
                 <InfoOutlined sx={{ color: "danger.plainColor" }} />
                 Please select an ingredient and amount.
               </FormHelperText>

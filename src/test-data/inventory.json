@@ -1,0 +1,82 @@
+{
+  "inventory": [
+    {
+      "name": "Pepperoni",
+      "emoji": "🍕",
+      "type": "topping",
+      "quantity": 5
+    },
+    {
+      "name": "Mushrooms",
+      "emoji": "🍄",
+      "type": "topping",
+      "quantity": 5
+    },
+    {
+      "name": "Onions",
+      "emoji": "🧅",
+      "type": "topping",
+      "quantity": 5
+    },
+    {
+      "name": "Pineapple",
+      "emoji": "🍍",
+      "type": "topping",
+      "quantity": 5
+    },
+    {
+      "name": "Marinara",
+      "emoji": "🍅",
+      "type": "sauce",
+      "quantity": 5
+    },
+    {
+      "name": "Barbecue",
+      "emoji": "🌶️",
+      "type": "sauce",
+      "quantity": 5
+    },
+    {
+      "name": "Mozzarella",
+      "emoji": "🧀",
+      "type": "cheese",
+      "quantity": 5
+    },
+    {
+      "name": "Thin Crust",
+      "emoji": "🥖",
+      "type": "crust",
+      "quantity": 5
+    },
+    {
+      "name": "Gluten-Free Crust",
+      "emoji": "🥯",
+      "type": "crust",
+      "quantity": 5
+    },
+    {
+      "name": "Bacon",
+      "emoji": "🥓",
+      "type": "topping",
+      "quantity": 5
+    },
+    {
+      "name": "Ham",
+      "emoji": "🍖",
+      "type": "topping",
+      "quantity": 5
+    },
+    {
+      "name": "Garlic",
+      "emoji": "🧄",
+      "type": "topping",
+      "quantity": 5
+    },
+    {
+      "name": "Salt",
+      "emoji": "🧂",
+      "type": "topping",
+      "quantity": 5
+    }
+  ]
+}

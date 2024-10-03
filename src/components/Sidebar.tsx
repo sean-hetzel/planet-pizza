@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/joy";
 import { Link } from "react-router-dom";
-import { DarkMode, LocalPizza, MenuBook } from "@mui/icons-material";
+import { LocalPizza, MenuBook, RocketLaunch } from "@mui/icons-material";
 
 const Sidebar = () => {
   return (
@@ -24,7 +24,7 @@ const Sidebar = () => {
         m={1}
         textColor="primary.plainColor"
         fontStyle={"italic"}
-        endDecorator={<DarkMode sx={{ color: "primary.plainColor" }} />}
+        endDecorator={<RocketLaunch sx={{ color: "primary.plainColor" }} />}
       >
         PLANET PIZZA
       </Typography>

@@ -1,0 +1,69 @@
+{
+  "ingredients": [
+    {
+      "name": "Pepperoni",
+      "emoji": "🍕",
+      "type": "topping"
+    },
+    {
+      "name": "Mushrooms",
+      "emoji": "🍄",
+      "type": "topping"
+    },
+    {
+      "name": "Onions",
+      "emoji": "🧅",
+      "type": "topping"
+    },
+    {
+      "name": "Pineapple",
+      "emoji": "🍍",
+      "type": "topping"
+    },
+    {
+      "name": "Marinara",
+      "emoji": "🍅",
+      "type": "sauce"
+    },
+    {
+      "name": "Barbecue",
+      "emoji": "🌶️",
+      "type": "sauce"
+    },
+    {
+      "name": "Mozzarella",
+      "emoji": "🧀",
+      "type": "cheese"
+    },
+    {
+      "name": "Thin Crust",
+      "emoji": "🥖",
+      "type": "crust"
+    },
+    {
+      "name": "Gluten-Free Crust",
+      "emoji": "🥯",
+      "type": "crust"
+    },
+    {
+      "name": "Bacon",
+      "emoji": "🥓",
+      "type": "topping"
+    },
+    {
+      "name": "Ham",
+      "emoji": "🍖",
+      "type": "topping"
+    },
+    {
+      "name": "Garlic",
+      "emoji": "🧄",
+      "type": "topping"
+    },
+    {
+      "name": "Salt",
+      "emoji": "🧂",
+      "type": "topping"
+    }
+  ]
+}
