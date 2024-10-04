@@ -13,11 +13,10 @@ import InventoryTable from "../components/InventoryTable";
 import ingredientsInventory from "../test-data/inventory.json";
 import ingredients from "../test-data/ingredients.json";
 import { useEffect, useState } from "react";
-import { IngredientsInventory } from "../types/inventory";
 import { Ingredient } from "../types/ingredient";
 
 const Inventory = () => {
-  const [inventory, setInventory] = useState<IngredientsInventory[]>([]);
+  const [inventory, setInventory] = useState<Ingredient[]>([]);
   const [selectedIngredient, setSelectedIngredient] =
     useState<Ingredient | null>(null); // Track selected ingredient
   const [quantity, setQuantity] = useState<number | undefined>();
@@ -40,9 +39,12 @@ const Inventory = () => {
     );
 
     if (existingIngredientIndex >= 0) {
-      // If ingredient exists, update its quantity
+      // If ingredient exists, update its quantity (safely check if quantity is defined)
       const updatedInventory = [...inventory];
-      updatedInventory[existingIngredientIndex].quantity += quantity;
+      updatedInventory[existingIngredientIndex].quantity =
+        (updatedInventory[existingIngredientIndex]?.quantity ?? 0) +
+        (quantity ?? 0);
+
       setInventory(updatedInventory);
     } else {
       // If ingredient doesn't exist, add it to the inventory
@@ -52,8 +54,8 @@ const Inventory = () => {
           name: selectedIngredient.name,
           emoji: selectedIngredient.emoji,
           type: selectedIngredient.type,
-          quantity,
-        }, // Add emoji as a placeholder
+          quantity: quantity ?? 0, // Default to 0 if quantity is undefined
+        },
       ]);
     }
 
@@ -79,13 +81,14 @@ const Inventory = () => {
               value={selectedIngredient}
               setValue={setSelectedIngredient}
               options={ingredients}
+              label="Select an Ingredient"
             />
           </Grid>
           <Grid>
             <SelectAmount
               value={quantity}
               setValue={setQuantity}
-              label="2. Select Amount"
+              label="Select Amount"
             />
           </Grid>
           <Grid>

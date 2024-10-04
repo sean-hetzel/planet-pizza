@@ -3,20 +3,21 @@ import { FormControl, FormLabel, IconButton, Input } from "@mui/joy";
 
 type SelectAmountProps = {
   value?: number;
-  setValue?: (newValue?: number) => void; 
+  setValue?: (newValue?: number) => void;
   label?: string;
   autoFocus?: boolean;
+  style?: React.CSSProperties; // Accept style prop
 };
 
 const SelectAmount = (props: SelectAmountProps) => {
-  const { value, setValue, label, autoFocus } = props;
+  const { value, setValue, label, autoFocus, style } = props;
 
   const handleIncrement = () => setValue?.(value !== undefined ? value + 1 : 1);
   const handleDecrement = () =>
     setValue?.(value !== undefined && value > 0 ? value - 1 : 0);
 
   return (
-    <FormControl>
+    <FormControl style={style}>
       {label && <FormLabel>{label}</FormLabel>}
       <Input
         placeholder="Enter quantity"

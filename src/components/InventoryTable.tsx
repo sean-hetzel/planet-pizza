@@ -1,16 +1,18 @@
 import { Button, ButtonGroup, Table } from "@mui/joy";
-import { IngredientsInventory } from "../types/inventory";
 import { Check, Close, Edit } from "@mui/icons-material";
 import { useState } from "react";
 import SelectAmount from "./SelectAmount";
+import useIsMobile from "../utils/useIsMobile";
+import { Ingredient } from "../types/ingredient";
 
 type InventoryTableProps = {
-  inventory: IngredientsInventory[];
+  inventory?: Ingredient[];
 };
 
 const InventoryTable = (props: InventoryTableProps) => {
   const { inventory } = props;
 
+  const isMobile = useIsMobile();
   const [editMode, setEditMode] = useState(false);
   const [activeIngredient, setActiveIngredient] = useState<number | null>(null);
   const [quantity, setQuantity] = useState<number>();
@@ -18,7 +20,7 @@ const InventoryTable = (props: InventoryTableProps) => {
   const handleEdit = (index: number) => {
     setEditMode(true);
     setActiveIngredient(index);
-    setQuantity(inventory[index].quantity);
+    setQuantity(inventory?.[index].quantity);
   };
 
   return (
@@ -31,14 +33,18 @@ const InventoryTable = (props: InventoryTableProps) => {
         </tr>
       </thead>
       <tbody style={{ background: "#0b0d0e" }}>
-        {inventory.map((ingredient, index) => (
+        {inventory?.map((ingredient, index) => (
           <tr key={index}>
             <td>
               {ingredient.emoji} {ingredient.name}
             </td>
             <td>
               {editMode && activeIngredient === index ? (
-                <SelectAmount value={quantity} setValue={setQuantity} />
+                <SelectAmount
+                  value={quantity}
+                  setValue={setQuantity}
+                  autoFocus
+                />
               ) : (
                 ingredient.quantity
               )}
@@ -50,6 +56,7 @@ const InventoryTable = (props: InventoryTableProps) => {
                   aria-label="cancel or confirm buttons"
                   sx={{ justifyContent: "flex-end" }}
                   color="primary"
+                  orientation={isMobile ? "vertical" : "horizontal"}
                 >
                   <Button
                     onClick={() => setEditMode(false)}
