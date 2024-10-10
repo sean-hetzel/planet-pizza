@@ -11,14 +11,14 @@ import SelectAmount from "../components/SelectAmount";
 import { Check, InfoOutlined } from "@mui/icons-material";
 import InventoryTable from "../components/InventoryTable";
 import ingredientsInventory from "../test-data/inventory.json";
-import ingredients from "../test-data/ingredients.json";
+import data from "../test-data/ingredients.json";
 import { useEffect, useState } from "react";
 import { Ingredient } from "../types/ingredient";
 
 const Inventory = () => {
   const [inventory, setInventory] = useState<Ingredient[]>([]);
   const [selectedIngredient, setSelectedIngredient] =
-    useState<Ingredient | null>(null); // Track selected ingredient
+    useState<Ingredient | null>(); // Track selected ingredient
   const [quantity, setQuantity] = useState<number | undefined>();
   const [error, setError] = useState(false); // Error state for form validation
 
@@ -80,7 +80,7 @@ const Inventory = () => {
             <SelectIngredient
               value={selectedIngredient}
               setValue={setSelectedIngredient}
-              options={ingredients}
+              options={data.ingredients}
               label="Select an Ingredient"
             />
           </Grid>

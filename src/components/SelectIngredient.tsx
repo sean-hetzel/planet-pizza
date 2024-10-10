@@ -13,16 +13,17 @@ import { Ingredient } from "../types/ingredient"; // Ensure the Ingredient type 
 type SelectIngredientProps = {
   value?: Ingredient | null; // Expect the selected ingredient to be passed
   setValue?: (ingredient: Ingredient | null) => void; // Function to set the selected ingredient
-  options?: { ingredients: Ingredient[] }; // Add pizzaIngredients as a prop
+  options?: Ingredient[]; // Add pizzaIngredients as a prop
   label?: string;
+  autoFocus?: boolean;
 };
 
 const SelectIngredient = (props: SelectIngredientProps) => {
-  const { value, setValue, options, label } = props;
+  const { value, setValue, options, label, autoFocus } = props;
 
   // Capitalize the type and then sort the ingredients by type and name
-  const ingredients: Ingredient[] = options?.ingredients
-    ? options.ingredients
+  const ingredients: Ingredient[] = options
+    ? options
         .map((ingredient) => ({
           ...ingredient,
           type:
@@ -46,6 +47,7 @@ const SelectIngredient = (props: SelectIngredientProps) => {
         placeholder="Search ingredient"
         groupBy={(option) => option.type} // Grouping by category
         getOptionLabel={(option) => `${option.emoji} ${option.name}`} // Displaying ingredient name
+        autoFocus={autoFocus}
         value={value} // Bind the selected value
         onChange={(_, newValue) => {
           setValue?.(newValue); // Update the selected ingredient

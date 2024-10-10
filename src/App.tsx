@@ -6,6 +6,7 @@ import Inventory from "./pages/Inventory";
 import Recipes from "./pages/Recipes";
 import Header from "./components/Header";
 import useIsMobile from "./utils/useIsMobile";
+import { URL } from "./types/constants";
 
 // Extend the theme and set the default mode to dark
 const theme = extendTheme({
@@ -32,9 +33,9 @@ function App() {
             <Header />
             <Box sx={{ p: 2 }}>
               <Routes>
-                <Route path="/" element={<Navigate to="/inventory" />} />
-                <Route path="/inventory" element={<Inventory />} />
-                <Route path="/recipes" element={<Recipes />} />
+                <Route path="/" element={<Navigate to={URL.INVENTORY} />} />
+                <Route path={URL.INVENTORY} element={<Inventory />} />
+                <Route path={URL.RECIPES} element={<Recipes />} />
               </Routes>
             </Box>
           </Box>
@@ -48,7 +49,7 @@ export default App;
 
 // Pizza names:
 // Jumbo Jupiter
-// Spicy Venus
+// Venus Inferno
 // Earthly Paradise
 
 // Topping manager:
