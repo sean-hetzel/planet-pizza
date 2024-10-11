@@ -8,8 +8,8 @@ import {
 } from "@mui/joy";
 import SelectIngredient from "../components/SelectIngredient";
 import SelectAmount from "../components/SelectAmount";
-import { Check, InfoOutlined } from "@mui/icons-material";
-import InventoryTable from "../components/InventoryTable";
+import { Add, InfoOutlined } from "@mui/icons-material";
+import IngredientTable from "../components/IngredientTable";
 import ingredientsInventory from "../test-data/inventory.json";
 import data from "../test-data/ingredients.json";
 import { useEffect, useState } from "react";
@@ -71,7 +71,7 @@ const Inventory = () => {
         Manage Inventory
       </Typography>
       <Box sx={{ mb: 4 }}>
-        <Typography level="h4" textColor="primary.plainColor">
+        <Typography level="h3" textColor="primary.plainColor">
           Add Ingredient
         </Typography>
         <Divider sx={{ mt: 1, mb: 2, bgcolor: "primary.plainColor" }} />
@@ -93,7 +93,7 @@ const Inventory = () => {
           </Grid>
           <Grid>
             <Button
-              endDecorator={<Check />}
+              endDecorator={<Add />}
               sx={{ mt: 3.3 }}
               onClick={handleAddToStock}
             >
@@ -101,7 +101,7 @@ const Inventory = () => {
             </Button>
             {error && (
               <FormHelperText
-                sx={{ color: "danger.plainColor", position: "absolute" }}
+                sx={{ color: "danger.plainColor", position: "absolute", mt: 1 }}
               >
                 <InfoOutlined sx={{ color: "danger.plainColor" }} />
                 Please select an ingredient and amount.
@@ -111,14 +111,14 @@ const Inventory = () => {
         </Grid>
       </Box>
       <Box sx={{ mb: 4 }}>
-        <Typography level="h4" textColor="primary.plainColor">
+        <Typography level="h3" textColor="primary.plainColor">
           In-Stock Ingredients
         </Typography>
         <Divider sx={{ mt: 1, mb: 2, bgcolor: "primary.plainColor" }} />
         {inventory.length === 0 ? (
           <p>No ingredients</p>
         ) : (
-          <InventoryTable inventory={inventory} />
+          <IngredientTable ingredients={inventory} showQuantity />
         )}
       </Box>
     </Box>

@@ -3,24 +3,28 @@ import {
   Button,
   Divider,
   FormControl,
+  FormHelperText,
   FormLabel,
   Grid,
   Input,
   Typography,
 } from "@mui/joy";
 import SelectIngredient from "../components/SelectIngredient";
-import { Add, Delete } from "@mui/icons-material";
+import { Add, Delete, InfoOutlined } from "@mui/icons-material";
 import { useState } from "react";
-import { Ingredient } from "../types/ingredient";
+import { Ingredient, Recipe } from "../types/ingredient";
 import data from "../test-data/ingredients.json";
 import { INGREDIENT_TYPE } from "../types/constants";
+import IngredientTable from "../components/IngredientTable";
 
 const Recipes = () => {
   const [pizzaName, setPizzaName] = useState<string>("");
   const [crust, setCrust] = useState<Ingredient | null>(null);
   const [sauce, setSauce] = useState<Ingredient | null>(null);
   const [cheese, setCheese] = useState<Ingredient | null>(null);
-  const [toppings, setToppings] = useState<Ingredient[]>([]); // Initialize as empty array
+  const [toppings, setToppings] = useState<(Ingredient | null)[]>([]); // Allow null values
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [addRecipeError, setAddRecipeError] = useState(false);
 
   const crustOptions = data.ingredients.filter(
     (ingredient) => ingredient.type === INGREDIENT_TYPE.CRUST
@@ -34,7 +38,7 @@ const Recipes = () => {
   const toppingOptions = data.ingredients.filter(
     (ingredient) => ingredient.type === INGREDIENT_TYPE.TOPPING
   );
-
+  console.log(toppings);
   const handleSetToppings = (newTopping: Ingredient | null, index: number) => {
     setToppings((prevToppings) => {
       if (!prevToppings) return prevToppings; // Check if null or undefined
@@ -63,18 +67,52 @@ const Recipes = () => {
     });
   };
 
+  const handleAddRecipe = () => {
+    if (!pizzaName || !crust || !sauce || !cheese) {
+      // Alert if required fields are missing
+      setAddRecipeError(true);
+      return;
+    }
+
+    setAddRecipeError(false);
+
+    // Filter toppings to ensure only valid ingredients (no null values)
+    const validToppings = toppings.filter(
+      (topping): topping is Ingredient => topping !== null
+    );
+
+    // Collect all ingredients (crust, sauce, cheese, and valid toppings)
+    const ingredients: Ingredient[] = [crust, sauce, cheese, ...validToppings];
+
+    // Create the new recipe object
+    const newRecipe: Recipe = {
+      name: pizzaName, // Use the pizza name from state
+      ingredients, // Combine all ingredients
+    };
+
+    // Add the new recipe to the existing list of recipes
+    setRecipes((prevRecipes) => [...prevRecipes, newRecipe]);
+
+    // Optionally, clear the form fields after adding the recipe
+    setPizzaName("");
+    setCrust(null);
+    setSauce(null);
+    setCheese(null);
+    setToppings([]);
+  };
+
   return (
     <>
       <Typography sx={{ mb: 2, color: "primary.plainColor" }}>
         Manage Recipes
       </Typography>
       <Box sx={{ mb: 4 }}>
-        <Typography level="h4" textColor="primary.plainColor">
+        <Typography level="h3" textColor="primary.plainColor">
           Create New Pizza Recipe
         </Typography>
         <Divider sx={{ mt: 1, mb: 2, bgcolor: "primary.plainColor" }} />
         <Grid container direction="column" spacing={2}>
-          <Grid display="flex">
+          <Grid>
             <FormControl>
               <FormLabel>Pizza Name</FormLabel>
               <Input
@@ -131,6 +169,21 @@ const Recipes = () => {
           ))}
           <Grid>
             <Button
+              onClick={() => handleAddRecipe()}
+              sx={{ mr: 2 }}
+              endDecorator={<Add />}
+            >
+              Add Recipe
+            </Button>
+            {addRecipeError && (
+              <FormHelperText
+                sx={{ color: "danger.plainColor", position: "absolute", mt: 1 }}
+              >
+                <InfoOutlined sx={{ color: "danger.plainColor" }} />
+                Please enter a pizza name, crust, sauce and cheese.
+              </FormHelperText>
+            )}
+            <Button
               onClick={() => handleSetToppings(null, toppings.length)} // Add new topping
               variant="soft"
               endDecorator={<Add />}
@@ -141,10 +194,22 @@ const Recipes = () => {
         </Grid>
       </Box>
       <Box sx={{ mb: 4 }}>
-        <Typography level="h4" textColor="primary.plainColor">
+        <Typography level="h3" textColor="primary.plainColor">
           Pizza Recipes
         </Typography>
         <Divider sx={{ mt: 1, mb: 2, bgcolor: "primary.plainColor" }} />
+        {recipes.map((recipe) => (
+          <Box sx={{ mb: 2 }}>
+            <Typography
+              level="h4"
+              textColor="primary.plainColor"
+              sx={{ mb: 1 }}
+            >
+              {recipe.name}
+            </Typography>
+            <IngredientTable ingredients={recipe.ingredients} showType />
+          </Box>
+        ))}
       </Box>
     </>
   );

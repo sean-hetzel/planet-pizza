@@ -5,12 +5,14 @@ import SelectAmount from "./SelectAmount";
 import useIsMobile from "../utils/useIsMobile";
 import { Ingredient } from "../types/ingredient";
 
-type InventoryTableProps = {
-  inventory?: Ingredient[];
+type IngredientTableProps = {
+  ingredients?: Ingredient[];
+  showType?: boolean;
+  showQuantity?: boolean;
 };
 
-const InventoryTable = (props: InventoryTableProps) => {
-  const { inventory } = props;
+const IngredientTable = (props: IngredientTableProps) => {
+  const { ingredients, showType, showQuantity } = props;
 
   const isMobile = useIsMobile();
   const [editMode, setEditMode] = useState(false);
@@ -20,35 +22,41 @@ const InventoryTable = (props: InventoryTableProps) => {
   const handleEdit = (index: number) => {
     setEditMode(true);
     setActiveIngredient(index);
-    setQuantity(inventory?.[index].quantity);
+    setQuantity(ingredients?.[index].quantity);
   };
 
   return (
     <Table sx={{ "& tr > *:last-child": { textAlign: "right" } }}>
       <thead>
         <tr>
+          {showType && <th style={{ verticalAlign: "middle" }}>Type</th>}
           <th style={{ verticalAlign: "middle" }}>Ingredient</th>
-          <th style={{ verticalAlign: "middle" }}>Quantity</th>
+          {showQuantity && (
+            <th style={{ verticalAlign: "middle" }}>Quantity</th>
+          )}
           <th></th>
         </tr>
       </thead>
       <tbody style={{ background: "#0b0d0e" }}>
-        {inventory?.map((ingredient, index) => (
+        {ingredients?.map((ingredient, index) => (
           <tr key={index}>
+            {showType && <td>{ingredient.type}</td>}
             <td>
               {ingredient.emoji} {ingredient.name}
             </td>
-            <td>
-              {editMode && activeIngredient === index ? (
-                <SelectAmount
-                  value={quantity}
-                  setValue={setQuantity}
-                  autoFocus
-                />
-              ) : (
-                ingredient.quantity
-              )}
-            </td>
+            {showQuantity && (
+              <td>
+                {editMode && activeIngredient === index ? (
+                  <SelectAmount
+                    value={quantity}
+                    setValue={setQuantity}
+                    autoFocus
+                  />
+                ) : (
+                  ingredient.quantity
+                )}
+              </td>
+            )}
             <td>
               {editMode && activeIngredient === index ? (
                 <ButtonGroup
@@ -90,4 +98,4 @@ const InventoryTable = (props: InventoryTableProps) => {
   );
 };
 
-export default InventoryTable;
+export default IngredientTable;
